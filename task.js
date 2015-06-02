@@ -136,15 +136,13 @@ $(document).ready(function(){
             console.log(target.text());
             typeList.deleteByTitle(target.text());
             var tempNode = target;
-            console.log(tempNode.context.nextSibling);
             if(target.context.className.indexOf("typeList")!==-1){
                 while(tempNode.context.nextSibling.className.indexOf("taskList")!==-1){
-                    tempNode = $(tempNode.nextSibling);
+                    tempNode = $(tempNode.context.nextSibling);
                     tempNode.css("display","none");
                 }
-                target.css("display","none");
             }
-            console.log(typeList);
+            target.css("display","none");
         }
         function refreshTimeCol(){
             var activeTask;

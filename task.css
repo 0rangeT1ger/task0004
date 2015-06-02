@@ -41,10 +41,10 @@ nav{
     color: #eeeeee;
     flex: none;
     -webkit-flex: none;
-    line-height: 30px;
+    line-height: 50px;
     cursor: pointer;
     width: 100%;
-    height: 30px;
+    height: 50px;
     padding-left: 50px;
     border-bottom: 1px solid #555555;
 }
@@ -53,10 +53,10 @@ nav{
     flex: none;
     -webkit-flex: none;
     position: relative;
-    line-height: 30px;
+    line-height: 50px;
     cursor: pointer;
     width: 100%;
-    height: 30px;
+    height: 50px;
     padding-left: 30px;
     border-bottom: 1px solid #555555;
 }
@@ -64,17 +64,17 @@ nav{
     text-align: center;
     display: none;
     background-color: #ff2222;
-    line-height: 30px;
-    height: 30px;
-    width: 40px;
+    line-height: 50px;
+    height: 50px;
+    width: 65px;
     float: right;
     position: relative;
 }
 @keyframes deleteTag-slideIn {
-    from{
+    from {
         left: 40px;
     }
-    to{
+    to {
         left: 0px;
     }
 }

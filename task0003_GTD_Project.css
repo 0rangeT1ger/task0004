@@ -77,10 +77,10 @@ nav img{
     color: #eeeeee;
     flex: none;
     -webkit-flex: none;
-    line-height: 30px;
+    line-height: 50px;
     cursor: pointer;
     width: 100%;
-    height: 30px;
+    height: 50px;
     padding-left: 50px;
 }
 .typeList{
@@ -88,10 +88,10 @@ nav img{
     flex: none;
     -webkit-flex: none;
     position: relative;
-    line-height: 30px;
+    line-height: 50px;
     cursor: pointer;
     width: 100%;
-    height: 30px;
+    height: 50px;
     padding-left: 30px;
 }
 .typeList:hover,
@@ -109,10 +109,9 @@ nav img{
     text-align: center;
     display: none;
     background-color: #ff2222;
-    line-height: 30px;
-    height: 30px;
+    line-height: 50px;
+    height: 50px;
     width: 40px;
-    font-size: 25px;
     float: right;
     position: relative;
 }
