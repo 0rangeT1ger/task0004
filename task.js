@@ -50,23 +50,55 @@ $(document).ready(function(){
             }
             return targetTypeList;
         }
+        function find(type,str){
+            var targetList = [];
+            for(var i = 0;i<todoList.length; i++){
+                if(todoList[i]){
+                    if(type==="title"&&todoList[i].title===str){         //如果是按照title寻找，那么搜寻出指定title的第一个todo
+                        return todoList[i];
+                    }
+                    if(type==="task"&&todoList[i].task===str){           //如果是按照task寻找，那么搜寻出task下所有的todo
+                        targetList.push(todoList[i]);
+                    }
+                    if(type==="type"&&todoList[i].type_===str){           //如果是按照type寻找，那么搜寻出这个type下所有的task
+                        targetList.push(todoList[i].task);
+                    }
+                    if(type==="date"&&todoList[i].date===str){
+                        targetList.push(todoList[i]);
+                    }
+                    if(type==="dateList"&&todoList[i].task===str){
+                        targetList.uniquePush(todoList[i].date);
+                    }
+                    if(type==="task-date"&&todoList[i].task===str.split("-")[0]&&todoList[i].date===str.split("-")[1]){
+                        targetList.push(todoList[i]);                     //如果按照date-task寻找，那么寻找task下所有的满足日期的todo对象
+                    }
+                    if(type==="type-task"&&todoList[i].type_===str.split("-")[0]&&todoList[i].task===str.split("-")[1]){
+                        targetList.push(todoList[i]);
+                    }
+                }
+            }
+            return targetList;
+        }
         var typeList=findTypeList(todoList);
-        function refreshTypeCol(){
+        function refreshTypeCol(){                                      //刷新type栏
             for(var i = 0; i<typeList.length; i++){
                 var tempNode = $(document.createElement("div"));
                 if(typeList[i].indexOf("task")===-1){
                     tempNode.addClass("typeList");
                     tempNode.text(typeList[i]);
-                    $(".typeListCol").append(tempNode);
                 }
                 else{
                     tempNode.addClass("taskList");
                     tempNode.text(typeList[i].split("/")[0]);
-                    $(".typeListCol").append(tempNode);
                 }
+                $(".typeListCol").append(tempNode);
             }
         }
         console.log(typeList);
         refreshTypeCol();
+        function refreshTimeCol(){
+            var activeTask;
+            var dateList = find("dateList",activeTask);
+        }
     }
 );
