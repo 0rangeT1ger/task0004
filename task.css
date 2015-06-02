@@ -10,6 +10,7 @@ blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{con
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    font-size: 1vw;
 }
 html{
     height: 100%;width: 100%;

@@ -137,12 +137,13 @@ $(document).ready(function(){
             typeList.deleteByTitle(target.text());
             var tempNode = target;
             if(target.context.className.indexOf("typeList")!==-1){
-                while(tempNode.context.nextSibling.className.indexOf("taskList")!==-1){
+                while(tempNode.context.nextSibling&&tempNode.context.nextSibling.className.indexOf("taskList")!==-1){
                     tempNode = $(tempNode.context.nextSibling);
                     tempNode.css("display","none");
                 }
             }
             target.css("display","none");
+            target.text("");
         }
         function refreshTimeCol(){
             var activeTask;
