@@ -119,13 +119,20 @@ $(document).ready(function(){
         }
         console.log(typeList);
         refreshTypeCol();
-        $(".typeList").hammer().on("tap",typeLIst_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
-        $(".typeList").hammer().on("press",typeLIst_pressHandler);       //          press代表想要删除一个任务
-        $(".taskList").hammer().on("press",typeLIst_pressHandler);       //          press一个type代表想要删除一个任务
-        function typeLIst_tapHandler(){
-
+        $(".typeList").hammer().on("tap",typeList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
+        $(".typeList").hammer().on("press",typeList_pressHandler);       //          press代表想要删除一个任务
+        $(".taskList").hammer().on("press",typeList_pressHandler);       //          press一个type代表想要删除一个任务
+        function typeList_tapHandler(ev){
+            console.log(ev.gesture.pointers[0].clientX,ev.gesture.pointers[0].clientY);
+            var clientX = ev.gesture.pointers[0].clientX;
+            var clientY = ev.gesture.pointers[0].clientY;
+            var tapResponse = $(document.createElement("div")).addClass("tapPoint").css("top",clientY).css("left",clientX);
+            $(this).append(tapResponse);
+            tapResponse.css("display","block");
+            tapResponse.addClass("tapResponse");
+            console.log(tapResponse);//unfinished 动画未实现。考虑尝试减小重点大小，扩大时间间隔。
         }
-        function typeLIst_pressHandler(){
+        function typeList_pressHandler(ev){
             if($(".deleteTagSlideIn")){
                 $(".deleteTagSlideIn").removeClass("deleteTagSlideIn");
             }
