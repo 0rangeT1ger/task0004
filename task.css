@@ -60,3 +60,36 @@ nav{
     padding-left: 30px;
     border-bottom: 1px solid #555555;
 }
+.deleteTag{
+    text-align: center;
+    display: none;
+    background-color: #ff2222;
+    line-height: 30px;
+    height: 30px;
+    width: 40px;
+    float: right;
+    position: relative;
+}
+@keyframes deleteTag-slideIn {
+    from{
+        left: 40px;
+    }
+    to{
+        left: 0px;
+    }
+}
+@-webkit-keyframes deleteTag-slideIn {
+    from{
+        left: 40px;
+    }
+    to{
+        left: 0px;
+    }
+}
+.deleteTagSlideIn{
+    display: block;
+    animation: deleteTag-slideIn 0.3s;
+    -webkit-animation: deleteTag-slideIn .3s;
+    -moz-animation: deleteTag-slideIn .3s;
+    -o-animation: deleteTag-slideIn .3s;
+}

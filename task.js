@@ -80,6 +80,25 @@ $(document).ready(function(){
             return targetList;
         }
         var typeList=findTypeList(todoList);
+        typeList.deleteByTitle = function(title){
+            for(var i = 0; i<this.length; i++){
+                if(this[i]+"删除"===title){  //当仅仅需要删除一个task时，删除就好了
+                    if(this[i].indexOf("task")!==-1){
+                        return this.splice(i,1);
+                    }
+                    else{
+                        var deleteNum = 0;
+                        for(var j = i+1; j<this.length; j++){
+                            if(this[j].indexOf("task")===-1){
+                                deleteNum = j-i;
+                                break;
+                            }
+                        }
+                        typeList.splice(i,j);
+                    }
+                }
+            }
+        };
         function refreshTypeCol(){                                      //刷新type栏
             for(var i = 0; i<typeList.length; i++){
                 var tempNode = $(document.createElement("div"));
@@ -92,10 +111,41 @@ $(document).ready(function(){
                     tempNode.text(typeList[i].split("/")[0]);
                 }
                 $(".typeListCol").append(tempNode);
+                var deleteTag = $(document.createElement("div"));
+                deleteTag.addClass("deleteTag").text("删除");
+                deleteTag.hammer().on("tap",deleteTag_TapHandler);
+                tempNode.append(deleteTag);
             }
         }
         console.log(typeList);
         refreshTypeCol();
+        $(".typeList").hammer().on("tap",typeLIst_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
+        $(".typeList").hammer().on("press",typeLIst_pressHandler);       //          press代表想要删除一个任务
+        $(".taskList").hammer().on("press",typeLIst_pressHandler);       //          press一个type代表想要删除一个任务
+        function typeLIst_tapHandler(){
+
+        }
+        function typeLIst_pressHandler(){
+            if($(".deleteTagSlideIn")){
+                $(".deleteTagSlideIn").removeClass("deleteTagSlideIn");
+            }
+            $(this.lastChild).addClass("deleteTagSlideIn");
+        }
+        function deleteTag_TapHandler(){
+            var target = $(this.parentNode);
+            console.log(target.text());
+            typeList.deleteByTitle(target.text());
+            var tempNode = target;
+            console.log(tempNode.context.nextSibling);
+            if(target.context.className.indexOf("typeList")!==-1){
+                while(tempNode.context.nextSibling.className.indexOf("taskList")!==-1){
+                    tempNode = $(tempNode.nextSibling);
+                    tempNode.css("display","none");
+                }
+                target.css("display","none");
+            }
+            console.log(typeList);
+        }
         function refreshTimeCol(){
             var activeTask;
             var dateList = find("dateList",activeTask);

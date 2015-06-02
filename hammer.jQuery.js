@@ -22,7 +22,6 @@
             hammerify(this, options);
         });
     };
-
     // extend the emit method to also trigger jQuery events
     Hammer.Manager.prototype.emit = (function(originalEmit) {
         return function(type, data) {
