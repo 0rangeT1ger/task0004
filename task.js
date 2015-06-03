@@ -23,9 +23,13 @@ $(document).ready(function(){
         })();
         var newTodo_1= new Todo("给李诗雨买钻戒！","具体的话，要五百克拉恐龙蛋！",utilDate,"娶了李诗雨！","李诗雨老公必做的一百件事！");
         var newTodo_2= new Todo("给李诗雨买婚纱！","买最贵的！",utilDate,"娶了李诗雨！","李诗雨老公必做的一百件事！");
-        var newTodo_3= new Todo("接李诗雨下班！！","用Uber搭一辆特斯拉接送！",utilDate,"服务李诗雨老婆爸爸！","李诗雨老公必做的一百件事！");
+        var newTodo_3= new Todo("接李诗雨下班！！","买一辆特斯拉接送！",utilDate,"服务李诗雨老婆爸爸！","李诗雨老公必做的一百件事！");
         var newTodo_4= new Todo("写代码！赚钱！吃饭！","努力工作！玩命学习！挣大钱！",utilDate,"做个好老公好男人！","人生理想！");
-        var todoList=[newTodo_1,newTodo_2,newTodo_3,newTodo_4];
+        var newTodo_5= new Todo("预定酒店！","订最大的的！",utilDate,"娶了李诗雨！","李诗雨老公必做的一百件事！");
+        var newTodo_6= new Todo("求婚！","在埃及浩瀚的夜空下！",utilDate,"娶了李诗雨！","李诗雨老公必做的一百件事！");
+        var newTodo_7= new Todo("每天做饭洗碗！","做最好吃的梅菜扣肉！",utilDate,"服务李诗雨老婆爸爸！","李诗雨老公必做的一百件事！");
+        var newTodo_8= new Todo("带着老婆周游世界！","钱挣够直接辞职去周游！",utilDate,"做个好老公好男人！","人生理想！");
+        var todoList=[newTodo_1,newTodo_2,newTodo_3,newTodo_4,newTodo_5,newTodo_6,newTodo_7,newTodo_8];
         /**
          * 初始数据设定完毕，数据格式基本定了下来，接下来编写数据方法
          * 通过遍历查询和筛选，从数组中寻找信息
@@ -100,6 +104,7 @@ $(document).ready(function(){
             }
         };
         function refreshTypeCol(){                                      //刷新type栏
+            $(".typeListCol").empty();
             for(var i = 0; i<typeList.length; i++){
                 var tempNode = $(document.createElement("div"));
                 if(typeList[i].indexOf("task")===-1){
@@ -117,20 +122,45 @@ $(document).ready(function(){
                 tempNode.append(deleteTag);
             }
         }
-        console.log(typeList);
         refreshTypeCol();
+        function refreshTodoListCol(todoList){
+            $(".todoListCol").empty();
+            for (var i = 0; i<todoList.length; i++){
+                var targetTitle = todoList[i].title;
+                var tempNode = $(document.createElement("div")).addClass("typeList").text(targetTitle).hammer().on("tap",todoList_tapHandler);
+                $(".todoListCol").append(tempNode);
+            }
+        }
+        function todoList_tapHandler(){
+
+        }
+        function backButton_tapHandler(ev){
+            $(".todoListCol").animate({left : "100%"},300,function(){
+                $(".todoListCol").css("display","none");
+            });
+        }
+        $(".backButton").hammer().on("tap",backButton_tapHandler);
         $(".typeList").hammer().on("tap",typeList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
+        $(".taskList").hammer().on("tap",taskList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
         $(".typeList").hammer().on("press",typeList_pressHandler);       //          press代表想要删除一个任务
         $(".taskList").hammer().on("press",typeList_pressHandler);       //          press一个type代表想要删除一个任务
         function typeList_tapHandler(ev){
-            console.log(ev.gesture.pointers[0].clientX,ev.gesture.pointers[0].clientY);
+            //console.log(ev.gesture.pointers[0].clientX,ev.gesture.pointers[0].clientY);  //动画未实现。考虑尝试减小重点大小，扩大时间间隔。
             var clientX = ev.gesture.pointers[0].clientX;
             var clientY = ev.gesture.pointers[0].clientY;
-            var tapResponse = $(document.createElement("div")).addClass("tapPoint").css("top",clientY).css("left",clientX);
-            $(this).append(tapResponse);
-            tapResponse.css("display","block");
-            tapResponse.addClass("tapResponse");
-            console.log(tapResponse);//unfinished 动画未实现。考虑尝试减小重点大小，扩大时间间隔。
+            //var tapResponse = $(document.createElement("div")).addClass("tapPoint").css("top",clientY).css("left",clientX);
+            //$(this).append(tapResponse);
+            //tapResponse.css("display","block");
+            //tapResponse.addClass("tapResponse");
+            //console.log(tapResponse);//unfinished
+        }
+        function taskList_tapHandler(ev){
+            var target = $(this);
+            var taskTitle = target.text().split("").splice(0,target.text().split("").length-2).join("");
+            var targetTaskList = find("task",taskTitle);
+            refreshTodoListCol(targetTaskList);
+            $(".todoListCol").css("display","block");
+            $(".todoListCol").animate({left : "20px"},300);
         }
         function typeList_pressHandler(ev){
             if($(".deleteTagSlideIn")){
@@ -140,7 +170,6 @@ $(document).ready(function(){
         }
         function deleteTag_TapHandler(){
             var target = $(this.parentNode);
-            console.log(target.text());
             typeList.deleteByTitle(target.text());
             var tempNode = target;
             if(target.context.className.indexOf("typeList")!==-1){
