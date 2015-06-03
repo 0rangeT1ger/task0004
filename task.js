@@ -140,6 +140,7 @@ $(document).ready(function(){
             });
         }
         $(".backButton").hammer().on("tap",backButton_tapHandler);
+        $(".backButton").hammer().on("swiperight",backButton_tapHandler);
         $(".typeList").hammer().on("tap",typeList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
         $(".taskList").hammer().on("tap",taskList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
         $(".typeList").hammer().on("press",typeList_pressHandler);       //          press代表想要删除一个任务
