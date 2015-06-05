@@ -153,7 +153,7 @@ $(document).ready(function(){
             var targetTodo = find("title",todoTitle);
             refreshTodoDetailCol(targetTodo);
             $(".todoDetailCol").css("display","block");
-            $(".todoDetailCol").animate({left : "40px"},300);
+            $(".todoDetailCol").animate({left : "60px"},300);
         }
         function todoListPressHandler(){
             if($(".deleteTagSlideIn")){
@@ -244,7 +244,7 @@ $(document).ready(function(){
             var targetTaskList = find("task",taskTitle);
             refreshTodoListCol(targetTaskList);
             $(".todoListCol").css("display","block");
-            $(".todoListCol").animate({left : "20px"},300);
+            $(".todoListCol").animate({left : "30px"},300);
         }
         function typeList_pressHandler(ev){
             if($(".deleteTagSlideIn")){
