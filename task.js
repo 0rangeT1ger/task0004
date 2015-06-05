@@ -127,26 +127,60 @@ $(document).ready(function(){
             $(".todoListCol").empty();
             for (var i = 0; i<todoList.length; i++){
                 var targetTitle = todoList[i].title;
-                var tempNode = $(document.createElement("div")).addClass("typeList").text(targetTitle).hammer().on("tap",todoList_tapHandler);
+                var tempNode = $(document.createElement("div")).addClass("typeList","todoList").text(targetTitle).hammer().on("tap",todoList_tapHandler);
+                tempNode.hammer().on("press",todoListPressHandler);
+                var deleteTag = $(document.createElement("div"));
+                deleteTag.addClass("deleteTag").text("删除").hammer().on("tap",deleteTag_TapHandler);
+                tempNode.append(deleteTag);
                 $(".todoListCol").append(tempNode);
             }
         }
+        function refreshTodoDetailCol(todo){
+            $(".todoDetailCol").empty();
+            var tempNode = $(document.createElement("div")).addClass("todoTitle").text(todo.title);
+            var tempNode2 = $(document.createElement("div")).addClass("todoDate").text(todo.date);
+            var tempNode3 = $(document.createElement("div")).addClass("todoDetail").text(todo.continent);
+            console.log(todo,tempNode,tempNode2,tempNode3);
+            $(".todoDetailCol").append(tempNode,tempNode2,tempNode3);
+        }
         function todoList_tapHandler(){
-
+            if(this.className.indexOf("back")!==-1){
+                return;
+            }
+            var target = $(this);
+            var todoTitle = target.text().split("").splice(0,target.text().split("").length-2).join("");
+            console.log(todoTitle);
+            var targetTodo = find("title",todoTitle);
+            refreshTodoDetailCol(targetTodo);
+            $(".todoDetailCol").css("display","block");
+            $(".todoDetailCol").animate({left : "40px"},300);
+        }
+        function todoListPressHandler(){
+            if($(".deleteTagSlideIn")){
+                $(".deleteTagSlideIn").removeClass("deleteTagSlideIn");
+            }
+            $(this.lastChild).addClass("deleteTagSlideIn");
         }
         function backButton_tapHandler(ev){
             $(".todoListCol").animate({left : "100%"},300,function(){
                 $(".todoListCol").css("display","none");
             });
         }
+        function backButton2_tapHandler(ev){
+            console.log("good");
+            $(".todoDetailCol").animate({left : "100%"},300,function(){
+                $(".todoDetailCol").css("display","none");
+            });
+        }
         $(".backButton").hammer().on("tap",backButton_tapHandler);
-        $(".backButton").hammer().on("swiperight",backButton_tapHandler);
+        $(".backButton2").hammer().on("tap",backButton2_tapHandler);
+        //$(".backButton").hammer().on("swiperight",backButton_tapHandler);    //[unfinished] 这里也许应当修改成swipedown和swipeup两个事件响应。
         $(".typeList").hammer().on("tap",typeList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
         $(".taskList").hammer().on("tap",taskList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
         $(".typeList").hammer().on("press",typeList_pressHandler);       //          press代表想要删除一个任务
         $(".taskList").hammer().on("press",typeList_pressHandler);       //          press一个type代表想要删除一个任务
         function typeList_tapHandler(ev){
-            //console.log(ev.gesture.pointers[0].clientX,ev.gesture.pointers[0].clientY);  //动画未实现。考虑尝试减小重点大小，扩大时间间隔。
+            //console.log(ev.gesture.pointers[0].clientX,ev.gesture.pointers[0].clientY);  // [unfinished] 动画未实现。考虑尝试减小重点大小，扩大时间间隔。
             var clientX = ev.gesture.pointers[0].clientX;
             var clientY = ev.gesture.pointers[0].clientY;
             //var tapResponse = $(document.createElement("div")).addClass("tapPoint").css("top",clientY).css("left",clientX);
@@ -156,6 +190,9 @@ $(document).ready(function(){
             //console.log(tapResponse);//unfinished
         }
         function taskList_tapHandler(ev){
+            if(this.className.indexOf("back")!==-1){
+                return;
+            }
             var target = $(this);
             var taskTitle = target.text().split("").splice(0,target.text().split("").length-2).join("");
             var targetTaskList = find("task",taskTitle);
@@ -169,7 +206,7 @@ $(document).ready(function(){
             }
             $(this.lastChild).addClass("deleteTagSlideIn");
         }
-        function deleteTag_TapHandler(){
+        function deleteTag_TapHandler(){                 //unfinished 数据结构没有调整
             var target = $(this.parentNode);
             typeList.deleteByTitle(target.text());
             var tempNode = target;
@@ -181,10 +218,6 @@ $(document).ready(function(){
             }
             target.css("display","none");
             target.text("");
-        }
-        function refreshTimeCol(){
-            var activeTask;
-            var dateList = find("dateList",activeTask);
         }
     }
 );
