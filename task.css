@@ -96,7 +96,9 @@ nav{
 }
 .typeList{
     overflow: hidden;
+    background-color: #e0e0ee;
     color: #222222;
+    font-weight: bolder;
     flex: none;
     -webkit-flex: none;
     position: relative;
