@@ -185,12 +185,12 @@ $(document).ready(function(){
             updateX(this,currentX);
         }
         function todoListCol_panEndHandler(ev){
+            updateX(this,0);
             $(this).css("left",currentX+20+"px");
-            console.log(currentX);
+            alert($(this).css("left")+currentX);
             $(".todoListCol").animate({left : "100%"},300,function(){
                 $(".todoListCol").css("display","none");
             });
-            updateX(this,0);
             currentX = 0;
         }
         function todoDetailCol_panMoveHandler(ev){
@@ -202,11 +202,11 @@ $(document).ready(function(){
             updateX(this,currentX);
         }
         function todoDetailCol_panEndHandler(ev){
+            updateX(this,0);
             $(this).css("left",currentX+40+"px");
             $(".todoDetailCol").animate({left : "100%"},300,function(){
                 $(".todoDetailCol").css("display","none");
             });
-            updateX(this,0);
             currentX = 0;
         }
         function updateX(ele,x){
