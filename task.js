@@ -144,7 +144,8 @@ $(document).ready(function(){
             $(".todoDetailCol").append(tempNode,tempNode2,tempNode3);
         }
         function todoList_tapHandler(){
-            if(this.className.indexOf("back")!==-1){
+            console.log(this);
+            if(this.className.indexOf("back")!==-1||window.event.target.className.indexOf("delete")!==-1){
                 return;
             }
             var target = $(this);
@@ -153,7 +154,7 @@ $(document).ready(function(){
             var targetTodo = find("title",todoTitle);
             refreshTodoDetailCol(targetTodo);
             $(".todoDetailCol").css("display","block");
-            $(".todoDetailCol").animate({left : "60px"},300);
+            $(".todoDetailCol").animate({left : "40px"},300);
         }
         function todoListPressHandler(){
             if($(".deleteTagSlideIn")){
@@ -244,7 +245,7 @@ $(document).ready(function(){
             var targetTaskList = find("task",taskTitle);
             refreshTodoListCol(targetTaskList);
             $(".todoListCol").css("display","block");
-            $(".todoListCol").animate({left : "30px"},300);
+            $(".todoListCol").animate({left : "20px"},300);
         }
         function typeList_pressHandler(ev){
             if($(".deleteTagSlideIn")){
