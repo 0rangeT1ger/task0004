@@ -181,29 +181,46 @@ $(document).ready(function(){
             if(ev.gesture.deltaX===0){
                 return;
             }
-            var target = $(this);
-            var deltaX = ev.gesture.deltaX - currentX;
-            var value = 'translate3d(' + deltaX + 'px, '+' 0, 0)';
-            console.log(deltaX," ",currentX," ",ev.gesture.deltaX);
-            this.style.webkitTransform = value;
-            this.style.mozTransform = value;
-            this.style.transform = value;
-            currentX = deltaX;
+            currentX = ev.gesture.deltaX;
+            updateX(this,currentX);
         }
         function todoListCol_panEndHandler(ev){
+            $(this).css("left",currentX+20+"px");
+            console.log(currentX);
             $(".todoListCol").animate({left : "100%"},300,function(){
                 $(".todoListCol").css("display","none");
             });
-            var value = 'translate3d( 0, 0, 0)';
-            //console.log(deltaX," ",currentX," ",ev.gesture.deltaX);
-            this.style.webkitTransform = value;
-            this.style.mozTransform = value;
-            this.style.transform = value;
+            updateX(this,0);
+            currentX = 0;
+        }
+        function todoDetailCol_panMoveHandler(ev){
+            //console.log(ev);
+            if(ev.gesture.deltaX===0){
+                return;
+            }
+            currentX = ev.gesture.deltaX;
+            updateX(this,currentX);
+        }
+        function todoDetailCol_panEndHandler(ev){
+            $(this).css("left",currentX+40+"px");
+            $(".todoDetailCol").animate({left : "100%"},300,function(){
+                $(".todoDetailCol").css("display","none");
+            });
+            updateX(this,0);
+            currentX = 0;
+        }
+        function updateX(ele,x){
+            var value = 'translate3d(' + x + 'px, '+' 0, 0)';
+            ele.style.webkitTransform = value;
+            ele.style.mozTransform = value;
+            ele.style.transform = value;
         }
         $(".backButton").hammer().on("tap",backButton_tapHandler);
         $(".backButton2").hammer().on("tap",backButton2_tapHandler);
         $(".todoListCol").hammer().on("panmove",todoListCol_panMoveHandler);
         $(".todoListCol").hammer().on("panend",todoListCol_panEndHandler);
+        $(".todoDetailCol").hammer().on("panmove",todoDetailCol_panMoveHandler);
+        $(".todoDetailCol").hammer().on("panend",todoDetailCol_panEndHandler);
         //$(".backButton").hammer().on("swiperight",backButton_tapHandler);    //[unfinished] 这里也许应当修改成swipedown和swipeup两个事件响应。
         $(".typeList").hammer().on("tap",typeList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
         $(".taskList").hammer().on("tap",taskList_tapHandler);           //操作逻辑：tap一个type代表 展开/收起 一个类型下面的所有task
