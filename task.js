@@ -162,6 +162,9 @@ $(document).ready(function(){
             $(this.lastChild).addClass("deleteTagSlideIn");
         }
         function backButton_tapHandler(ev){
+            if($(".todoDetailCol").css("display")!=="none"){
+                return;
+            }
             $(".todoListCol").animate({left : "100%"},300,function(){
                 $(".todoListCol").css("display","none");
             });
