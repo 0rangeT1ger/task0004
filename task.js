@@ -187,7 +187,6 @@ $(document).ready(function(){
         function todoListCol_panEndHandler(ev){
             updateX(this,0);
             $(this).css("left",currentX+20+"px");
-            alert($(this).css("left")+currentX);
             $(".todoListCol").animate({left : "100%"},300,function(){
                 $(".todoListCol").css("display","none");
             });
