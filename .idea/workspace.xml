@@ -36,8 +36,8 @@
       <file leaf-file-name="task.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/task.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2400722">
-              <caret line="190" column="56" selection-start-line="190" selection-start-column="56" selection-end-line="190" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.33212996">
+              <caret line="125" column="41" selection-start-line="125" selection-start-column="41" selection-end-line="125" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -647,14 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.25">
-          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.4333334">
@@ -663,10 +655,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/task.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.25">
+          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/task.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2400722">
-          <caret line="190" column="56" selection-start-line="190" selection-start-column="56" selection-end-line="190" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.33212996">
+          <caret line="125" column="41" selection-start-line="125" selection-start-column="41" selection-end-line="125" selection-end-column="41" />
           <folding />
         </state>
       </provider>

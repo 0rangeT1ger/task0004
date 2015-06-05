@@ -127,7 +127,7 @@ $(document).ready(function(){
             $(".todoListCol").empty();
             for (var i = 0; i<todoList.length; i++){
                 var targetTitle = todoList[i].title;
-                var tempNode = $(document.createElement("div")).addClass("typeList","todoList").text(targetTitle).hammer().on("tap",todoList_tapHandler);
+                var tempNode = $(document.createElement("div")).addClass("taskList","todoList").text(targetTitle).hammer().on("tap",todoList_tapHandler);
                 tempNode.hammer().on("press",todoListPressHandler);
                 var deleteTag = $(document.createElement("div"));
                 deleteTag.addClass("deleteTag").text("删除").hammer().on("tap",deleteTag_TapHandler);
